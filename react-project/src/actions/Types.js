@@ -1,0 +1,4 @@
+// Login Module Types
+export const LOAD_DATA = "LOAD_DATA";
+export const LOAD_EDITABLE_PRODUCT = "LOAD_EDITABLE_PRODUCT";
+export const SAVE_EDITABLE_PRODUCT = "SAVE_EDITABLE_PRODUCT";
