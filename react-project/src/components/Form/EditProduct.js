@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import { Link, withRouter } from "react-router-dom";
 
-// // Action
 import { setProductData } from "../../actions/AppActions";
 
 const EditProduct = ({ products, history, pricingInfo, setProductData }) => {

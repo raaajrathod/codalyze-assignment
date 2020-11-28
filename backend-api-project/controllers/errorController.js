@@ -1,5 +1,6 @@
 const AppError = require("./../utils/appError");
 
+// Send Error in Development Mode
 const sendErrorForDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -9,6 +10,7 @@ const sendErrorForDev = (err, res) => {
   });
 };
 
+// Send Error to Client in Production Mode
 const sendErrorForProd = (err, res) => {
   /// Opertional Error
   if (err.isOperational) {
@@ -26,17 +28,20 @@ const sendErrorForProd = (err, res) => {
   }
 };
 
+// Handle Error from DB
 const handleCastErrorDB = (err, res) => {
   const message = `Invalid ${err.path} : ${err.value}`;
   return new AppError(message, 400);
 };
 
+// Handle Duplication
 const handleDuplicateError = (err, res) => {
   const message = `Name '${err.keyValue.name}' already in use. Please choose another name.`;
 
   return new AppError(message, 400);
 };
 
+// Handle Validation Error
 const handleValidationError = (err, res) => {
   const errors = Object.values(err.errors).map((el) => el.message);
 
@@ -44,7 +49,6 @@ const handleValidationError = (err, res) => {
 
   return new AppError(message, 400);
 };
-
 
 module.exports = (err, req, res, next) => {
   //   console.log(err.stack);
@@ -59,6 +63,6 @@ module.exports = (err, req, res, next) => {
     if (error.code === 11000) error = handleDuplicateError(error, res);
     if (error.name === "ValidationError")
       error = handleValidationError(error, res);
-      sendErrorForProd(error, res);
+    sendErrorForProd(error, res);
   }
 };

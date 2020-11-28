@@ -5,6 +5,7 @@ import {
 } from "./Types";
 import { products, pricingInfo } from "../json/staticData";
 
+// Load static Data into Store
 export const loadData = () => async (dispatch) => {
   if (products && pricingInfo) {
     dispatch({
@@ -14,6 +15,7 @@ export const loadData = () => async (dispatch) => {
   }
 };
 
+// Load Product into Store to Edit
 export const loadProductToEdit = (product) => async (dispatch) => {
   if (products) {
     dispatch({
@@ -23,11 +25,13 @@ export const loadProductToEdit = (product) => async (dispatch) => {
   }
 };
 
+// Store Updated Product Data into Store
 export const setProductData = (formData, history) => async (dispatch) => {
   dispatch({
     type: SAVE_EDITABLE_PRODUCT,
     payload: { formData },
   });
 
+  // Redirect After Storing
   history.push("/");
 };

@@ -56,8 +56,6 @@ app.use(
   })
 );
 
-app.use(compression());
-
 // Test Middlware
 app.use((req, res, next) => {
   // console.log('Hello from the middleware 👋');
